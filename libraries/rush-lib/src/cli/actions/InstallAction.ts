@@ -53,6 +53,8 @@ export class InstallAction extends BaseInstallAction {
 
   protected async buildInstallOptionsAsync(): Promise<IInstallManagerOptions> {
     const terminal: Terminal = new Terminal(new ConsoleTerminalProvider());
+    const { pnpmFilterArguments, splitWorkspacePnpmFilterArguments } =
+      await this._selectionParameters!.getPnpmFilterArgumentsAsync(terminal);
     return {
       debug: this.parser.isDebug,
       allowShrinkwrapUpdates: false,
@@ -67,7 +69,8 @@ export class InstallAction extends BaseInstallAction {
       // it is safe to assume that the value is not null
       maxInstallAttempts: this._maxInstallAttempts.value!,
       // These are derived independently of the selection for command line brevity
-      pnpmFilterArguments: await this._selectionParameters!.getPnpmFilterArgumentsAsync(terminal),
+      pnpmFilterArguments,
+      splitWorkspacePnpmFilterArguments,
       checkOnly: this._checkOnlyParameter.value
     };
   }

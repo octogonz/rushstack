@@ -441,7 +441,7 @@ export class WorkspaceInstallManager extends BaseInstallManager {
 
       // Run "npm install" in the common folder
       const installArgs: string[] = ['install'];
-      this.pushConfigurationArgs(installArgs, this.options);
+      this._pushConfigurationArgsForSplitWorkspace(installArgs, this.options);
 
       console.log(
         os.EOL +
@@ -608,6 +608,21 @@ export class WorkspaceInstallManager extends BaseInstallManager {
       args.push('--link-workspace-packages', 'false');
 
       for (const arg of this.options.pnpmFilterArguments) {
+        args.push(arg);
+      }
+    }
+  }
+
+  // Push installArgs for split workspace
+  private _pushConfigurationArgsForSplitWorkspace(args: string[], options: IInstallManagerOptions): void {
+    super.pushConfigurationArgs(args, options);
+
+    // Add workspace-specific args
+    if (this.rushConfiguration.packageManager === 'pnpm') {
+      args.push('--recursive');
+      args.push('--link-workspace-packages', 'false');
+
+      for (const arg of this.options.splitWorkspacePnpmFilterArguments) {
         args.push(arg);
       }
     }

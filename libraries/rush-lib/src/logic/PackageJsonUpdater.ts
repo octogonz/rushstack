@@ -248,6 +248,7 @@ export class PackageJsonUpdater {
         variant: variant,
         maxInstallAttempts: RushConstants.defaultMaxInstallAttempts,
         pnpmFilterArguments: [],
+        splitWorkspacePnpmFilterArguments: [],
         checkOnly: false
       };
 

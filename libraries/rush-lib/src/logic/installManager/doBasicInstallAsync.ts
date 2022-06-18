@@ -37,6 +37,7 @@ export async function doBasicInstallAsync(options: IRunInstallOptions): Promise<
       recheckShrinkwrap: false,
       collectLogFile: false,
       pnpmFilterArguments: [],
+      splitWorkspacePnpmFilterArguments: [],
       maxInstallAttempts: 1,
       networkConcurrency: undefined
     }

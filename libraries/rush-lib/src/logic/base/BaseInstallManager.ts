@@ -107,6 +107,11 @@ export interface IInstallManagerOptions {
    * These restrict the scope of a workspace installation.
    */
   pnpmFilterArguments: string[];
+
+  /**
+   * Filters to be passed to PNPM during installation for split workspace.
+   */
+  splitWorkspacePnpmFilterArguments: string[];
 }
 
 /**
@@ -160,7 +165,8 @@ export abstract class BaseInstallManager {
   }
 
   public async doInstallAsync(): Promise<void> {
-    const isFilteredInstall: boolean = this.options.pnpmFilterArguments.length > 0;
+    const isFilteredInstall: boolean =
+      this.options.pnpmFilterArguments.length + this.options.splitWorkspacePnpmFilterArguments.length > 0;
     const useWorkspaces: boolean =
       this.rushConfiguration.pnpmOptions && this.rushConfiguration.pnpmOptions.useWorkspaces;
 
