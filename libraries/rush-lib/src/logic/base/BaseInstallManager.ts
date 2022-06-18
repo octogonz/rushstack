@@ -36,6 +36,7 @@ import { PolicyValidator } from '../policy/PolicyValidator';
 import { WebClient, WebClientResponse } from '../../utilities/WebClient';
 import { SetupPackageRegistry } from '../setup/SetupPackageRegistry';
 import { PnpmfileConfiguration } from '../pnpm/PnpmfileConfiguration';
+import { SplitWorkspacePnpmfileConfiguration } from '../pnpm/SplitWorkspacePnpmfileConfiguration';
 
 export interface IInstallManagerOptions {
   /**
@@ -480,7 +481,9 @@ export abstract class BaseInstallManager {
       await PnpmfileConfiguration.writeCommonTempPnpmfileShimAsync(this.rushConfiguration, this.options);
 
       // FIXME: Pnpmfile shim for split workspace???
-      await PnpmfileConfiguration.writeCommonTempSplitGlobalPnpmfileAsync(this.rushConfiguration);
+      await SplitWorkspacePnpmfileConfiguration.writeCommonTempSplitGlobalPnpmfileAsync(
+        this.rushConfiguration
+      );
     }
 
     // Allow for package managers to do their own preparation and check that the shrinkwrap is up to date
