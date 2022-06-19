@@ -480,7 +480,6 @@ export abstract class BaseInstallManager {
     if (this.rushConfiguration.packageManager === 'pnpm') {
       await PnpmfileConfiguration.writeCommonTempPnpmfileShimAsync(this.rushConfiguration, this.options);
 
-      // FIXME: Pnpmfile shim for split workspace???
       await SplitWorkspacePnpmfileConfiguration.writeCommonTempSplitGlobalPnpmfileAsync(
         this.rushConfiguration
       );
