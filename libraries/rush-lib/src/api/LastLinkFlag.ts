@@ -55,6 +55,4 @@ export class LastLinkFlagFactory {
   public static getCommonTempFlag(rushConfiguration: RushConfiguration): LastLinkFlag {
     return new LastLinkFlag(rushConfiguration.commonTempFolder, {});
   }
-
-  // FIXME: It seems Link won't happen in split workspace, ignore for now
 }
